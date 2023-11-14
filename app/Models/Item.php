@@ -22,11 +22,11 @@ class Item extends Model
         'review'
     ];
 
-    public function brands(){
+    public function brand(){
         return $this->belongsTo(Brand::class);
     }
 
-    public function types(){
+    public function type(){
         return $this->belongsTo(Type::class);
     }
 }
