@@ -14,18 +14,18 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->text('address')->nullable();
-            $table->string('city');
-            $table->string('zip');
-            $table->string('status');
+            $table->string('city')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('status')->default('pending');
             $table->foreignId('item_id');
             $table->foreignId('user_id');
-            $table->integer('total_price');
-            $table->string('payment_method');
-            $table->string('payment_url');
-            $table->string('payment_status');
+            $table->integer('total_price')->default(0);
+            $table->string('payment_method')->default('midtrans');
+            $table->string('payment_url')->nullable();
+            $table->string('payment_status')->default('pending');
             $table->timestamps();
             $table->softDeletes();
         });
