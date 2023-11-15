@@ -24,11 +24,11 @@ public function index()
                 return '
                     <a class="block w-full px-2 py-1 mb-1 text-xs text-center text-white transition duration-500 bg-gray-700 border border-gray-700 rounded-md select-none ease hover:bg-gray-800 focus:outline-none focus:shadow-outline"
                         href="' . route('admin.brand.edit', $brand->id) . '">
-                        Sunting
+                        Edit
                     </a>
                     <form class="block w-full" onsubmit="return confirm(\'Apakah anda yakin?\');" -block" action="' . route('admin.brand.destroy', $brand->id) . '" method="POST">
                     <button class="w-full px-2 py-1 text-xs text-white transition duration-500 bg-red-500 border border-red-500 rounded-md select-none ease hover:bg-red-600 focus:outline-none focus:shadow-outline" >
-                        Hapus
+                        Delete
                     </button>
                         ' . method_field('delete') . csrf_field() . '
                     </form>';

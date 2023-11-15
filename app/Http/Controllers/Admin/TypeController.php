@@ -24,11 +24,11 @@ class TypeController extends Controller
                 return '
                     <a class="block w-full px-2 py-1 mb-1 text-xs text-center text-white transition duration-500 bg-gray-700 border border-gray-700 rounded-md select-none ease hover:bg-gray-800 focus:outline-none focus:shadow-outline"
                         href="' . route('admin.type.edit', $type->id) . '">
-                        Sunting
+                        Edit
                     </a>
                     <form class="block w-full" onsubmit="return confirm(\'Apakah anda yakin?\');" -block" action="' . route('admin.type.destroy', $type->id) . '" method="POST">
                     <button class="w-full px-2 py-1 text-xs text-white transition duration-500 bg-red-500 border border-red-500 rounded-md select-none ease hover:bg-red-600 focus:outline-none focus:shadow-outline" >
-                        Hapus
+                        Delete
                     </button>
                         ' . method_field('delete') . csrf_field() . '
                     </form>';
@@ -74,15 +74,20 @@ class TypeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $type = Type::findOrFail($id);
+        return view('admin.type.edit', compact('type'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Type $type)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['name']) . '-' . Str::lower(Str::random(5));
+
+        $type->update($data);
+        return redirect(route('admin.type.index'))->with('success', 'Type successfully updated');
     }
 
     /**

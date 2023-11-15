@@ -21,7 +21,7 @@
                         {{ __('Brand') }}
                     </x-nav-link>
                     {{-- Admin Manage Type --}}
-                    <x-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
+                    <x-nav-link href="{{ route('admin.type.index') }}" :active="request()->routeIs('admin.type.index')">
                         {{ __('Type') }}
                     </x-nav-link>
                     {{-- Admin Manage Item --}}
