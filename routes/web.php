@@ -23,6 +23,15 @@ Route::prefix('admin')->name('admin.')->middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+    // Admin Dashboard
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    // Admin Brand Routing
     Route::resource('brand', App\Http\Controllers\Admin\BrandController::class);
+
+    // Admin Type Routing
+    Route::resource('type', App\Http\Controllers\Admin\TypeController::class);
+
+    // Admin Item Routing
+    Route::resource('item', App\Http\Controllers\Admin\ItemController::class);
 });

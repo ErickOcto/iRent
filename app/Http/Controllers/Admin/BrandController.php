@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\Controller;
 use App\Models\Item;
-use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
