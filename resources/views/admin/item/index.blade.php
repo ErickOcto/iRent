@@ -34,6 +34,8 @@
           {
             data: 'type.name',
             name: 'type.name'
+            orderable: false,
+            searchable: false,
           },
           {
             data: 'brand.name',
