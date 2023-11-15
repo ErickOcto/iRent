@@ -38,18 +38,56 @@
               <input value="{{ old('name') }}" name="name"
                      class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
                      id="grid-last-name" type="text" placeholder="Input item name" required>
-              <div class="mt-2 text-sm text-gray-500">
+              <div class="mt-10 text-sm text-gray-500">
                 Item name is required, and maximal character is 255.
               </div>
 
               <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase" for="grid-last-name">
                 Brand*
               </label>
-              <select value="{{ old('name') }}" name="brand_id"
+              <select name="brand_id"
+                     class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                     type="text" placeholder="Input item name" required>
+                     @foreach ($brands as $brand)
+                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                     @endforeach
+              </select>
+              <div class="mt-10 text-sm text-gray-500">
+                Brand is required, please choose
+              </div>
+
+              <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase" for="grid-last-name">
+                Type*
+              </label>
+              <select name="type_id"
+                     class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                     type="text" placeholder="Input item name" required>
+                     @foreach ($types as $type)
+                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                     @endforeach
+              </select>
+              <div class="mt-10 text-sm text-gray-500">
+                Type is required, please choose
+              </div>
+
+              <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase" for="grid-last-name">
+                Features*
+              </label>
+              <input value="{{ old('features') }}" name="features"
                      class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
                      id="grid-last-name" type="text" placeholder="Input item name" required>
-              <div class="mt-2 text-sm text-gray-500">
-                Brand is required, please choose
+              <div class="mt-10 text-sm text-gray-500">
+                Item features is optional, fill example : Fitur 1, Fitur 2, Fitur 3, etc.
+              </div>
+
+              <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase" for="grid-last-name">
+                Image*
+              </label>
+              <input value="{{ old('features') }}" name="features"
+                     class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                     id="grid-last-name" type="text" placeholder="Input item name" required>
+              <div class="mt-10 text-sm text-gray-500">
+                Item photo is optional, can upload more than one.
               </div>
             </div>
           </div>
