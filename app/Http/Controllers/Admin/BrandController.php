@@ -7,6 +7,7 @@ use App\Models\Brand;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Controllers\Controller;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
@@ -14,21 +15,19 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //Untuk DataTables AJAX
-        if(request()->ajax()){
-            $query = Brand::query();
-
+public function index()
+{
+    if (request()->ajax()) {
+        $query = Brand::query();
 
         return DataTables::of($query)
             ->addColumn('action', function ($brand) {
                 return '
                     <a class="block w-full px-2 py-1 mb-1 text-xs text-center text-white transition duration-500 bg-gray-700 border border-gray-700 rounded-md select-none ease hover:bg-gray-800 focus:outline-none focus:shadow-outline"
-                        href="' . route('admin.brands.edit', $brand->id) . '">
+                        href="' . route('admin.brand.edit', $brand->id) . '">
                         Sunting
                     </a>
-                    <form class="block w-full" onsubmit="return confirm(\'Apakah anda yakin?\');" -block" action="' . route('admin.brands.destroy', $brand->id) . '" method="POST">
+                    <form class="block w-full" onsubmit="return confirm(\'Apakah anda yakin?\');" -block" action="' . route('admin.brand.destroy', $brand->id) . '" method="POST">
                     <button class="w-full px-2 py-1 text-xs text-white transition duration-500 bg-red-500 border border-red-500 rounded-md select-none ease hover:bg-red-600 focus:outline-none focus:shadow-outline" >
                         Hapus
                     </button>
@@ -37,25 +36,29 @@ class BrandController extends Controller
             })
             ->rawColumns(['action'])
             ->make();
-        }
-        //Script return halaman
-        return view('admin.brand.index');
     }
+
+    return view('admin.brand.index');
+}
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('admin.brand.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['name'] . '-' . Str::lower(Str::random(5)));
+        Brand::create($data);
+
+        return redirect(route('admin.brand.index'))->with('success', 'Brand is successfully added');
     }
 
     /**
@@ -71,15 +74,20 @@ class BrandController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+        return view('admin.brand.edit', compact('brand'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BrandRequest $request, Brand $brand)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['name']) . '-' . Str::lower(Str::random(5));
+        $brand->update($data);
+
+        return redirect(route('admin.brand.index'))->with('success', 'Brand successfully Edited');
     }
 
     /**
@@ -87,6 +95,9 @@ class BrandController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Item::where('brand_id', $id)->delete();
+        Brand::findOrFail($id)->delete();
+
+        return redirect(route('admin.brand.index'));
     }
 }
