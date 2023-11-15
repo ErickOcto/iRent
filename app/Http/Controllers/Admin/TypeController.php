@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TypeRequest;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class TypeController extends Controller
 {
@@ -43,15 +45,20 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.type.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TypeRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $data['slug'] = Str::slug($data['name']) . '-' . Str::lower(Str::random(5));
+
+        Type::create($data);
+        return redirect(route('admin.type.index'));
     }
 
     /**

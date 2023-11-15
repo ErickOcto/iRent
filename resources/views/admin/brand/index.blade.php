@@ -48,7 +48,7 @@
       <div class="mb-10">
         <a href="{{ route('admin.brand.create') }}"
            class="px-4 py-2 font-bold text-white bg-green-500 rounded shadow-lg hover:bg-green-700">
-          + Buat Brand
+          + Add Brand
         </a>
       </div>
       <div class="overflow-hidden shadow sm:rounded-md">
@@ -57,9 +57,9 @@
             <thead>
               <tr>
                 <th style="max-width: 1%">ID</th>
-                <th>Nama</th>
+                <th>Name</th>
                 <th>Slug</th>
-                <th style="max-width: 1%">Aksi</th>
+                <th style="max-width: 1%">Action</th>
               </tr>
             </thead>
             <tbody></tbody>
