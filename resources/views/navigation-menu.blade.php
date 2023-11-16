@@ -13,11 +13,11 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     {{-- Admin Dashboard --}}
-                    <x-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
+                    <x-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard*')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     {{-- Admin Manage Brand --}}
-                    <x-nav-link href="{{ route('admin.brand.index') }}" :active="request()->routeIs('admin.brand.index')">
+                    <x-nav-link href="{{ route('admin.brand.index') }}" :active="request()->routeIs('admin.brand.index*')">
                         {{ __('Brand') }}
                     </x-nav-link>
                     {{-- Admin Manage Type --}}

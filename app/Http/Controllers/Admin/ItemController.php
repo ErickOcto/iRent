@@ -60,6 +60,24 @@ class ItemController extends Controller
     {
         $data = $request->all();
         $data['slug'] = Str::slug($data['name']) . '-' . Str::lower(Str::random(5));
+
+        // Upload multiple photos
+        if($request->hasFile('photos')){
+            $photos = [];
+
+            foreach ($request->file('photos') as $photo) {
+                $photoPath = $photo->store('assets/item', 'public');
+
+                // Push To Array
+                array_push($photos, $photoPath);
+            }
+
+            $data['photos'] = json_encode($photos);
+        }
+
+        Item::create($data);
+
+        return redirect(route('admin.item.index'));
     }
 
     /**
