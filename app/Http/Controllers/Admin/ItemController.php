@@ -102,15 +102,37 @@ class ItemController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item = Item::findOrFail($id);
+        $brands = Brand::all();
+        $types = Type::all();
+
+        return view('admin.item.edit', compact('types', 'brands', 'item'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Item $item)
     {
-        //
+        $data = $request->all();
+
+        // Upload multiple photos
+        if($request->hasFile('photos')){
+            $photos = [];
+
+            foreach ($request->file('photos') as $photo) {
+                $photoPath = $photo->store('assets/item', 'public');
+
+                // Push To Array
+                array_push($photos, $photoPath);
+            }
+
+            $data['photos'] = json_encode($photos);
+        }
+
+        $item->update($data);
+
+        return redirect(route('admin.item.index'));
     }
 
     /**

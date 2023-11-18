@@ -31,7 +31,7 @@ class ItemRequest extends FormRequest
             'star' => 'numeric|required',
             'review' => 'numeric|required',
             'photos' => 'required|array',
-            'photos.*' => 'image|required|mimes:png,jpg,webp,jpeg',
+            'photos.*' => 'image|mimes:png,jpg,webp,jpeg',
         ];
     }
 }
