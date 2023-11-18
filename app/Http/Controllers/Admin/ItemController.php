@@ -22,6 +22,9 @@ class ItemController extends Controller
         $query = Item::query();
 
         return DataTables::of($query)
+        ->editColumn('thumbnail', function($item){
+            return '<img src="' . $item->thumbnail . '" alt="Thumbnail" class="w-20 mx-auto rounded-md">';
+        })
             ->addColumn('action', function ($item) {
                 return '
                     <a class="block w-full px-2 py-1 mb-1 text-xs text-center text-white transition duration-500 bg-gray-700 border border-gray-700 rounded-md select-none ease hover:bg-gray-800 focus:outline-none focus:shadow-outline"
@@ -35,7 +38,13 @@ class ItemController extends Controller
                         ' . method_field('delete') . csrf_field() . '
                     </form>';
             })
-            ->rawColumns(['action'])
+            ->addColumn('type.name', function ($item) {
+                return $item->type ? $item->type->name : '';
+            })
+            ->addColumn('brand.name', function ($item) {
+                return $item->brand ? $item->brand->name : '';
+            })
+            ->rawColumns(['action', 'thumbnail'])
             ->make();
     }
 

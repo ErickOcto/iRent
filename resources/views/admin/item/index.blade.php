@@ -14,36 +14,36 @@
         serverSide: true,
         stateSave: true,
         ajax: {
-          url: '{!! url()->current() !!}',
+          url: '{!! route('admin.item.index') !!}',
         },
-        // language: {
-        //   url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/id.json'
-        // },
+        language: {
+          url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/id.json'
+        },
         columns: [{
             data: 'id',
             name: 'id',
           },
           {
-            data: 'photos',
-            name: 'photos'
-          },
-          {
-            data: 'name',
-            name: 'name'
-          },
-          {
-            data: 'type.name',
-            name: 'type.name'
+            data: 'thumbnail',
+            name: 'thumbnail',
             orderable: false,
             searchable: false,
           },
           {
+            data: 'name',
+            name: 'name',
+          },
+          {
+            data: 'type.name',
+            name: 'type.name',
+          },
+          {
             data: 'brand.name',
-            name: 'brand.name'
+            name: 'brand.name',
           },
           {
             data: 'price',
-            name: 'price'
+            name: 'price',
           },
           {
             data: 'action',
@@ -71,8 +71,11 @@
             <thead>
               <tr>
                 <th style="max-width: 1%">ID</th>
+                <th>Thumbnail</th>
                 <th>Name</th>
-                <th>Slug</th>
+                <th>Type</th>
+                <th>Brand</th>
+                <th>Price</th>
                 <th style="max-width: 1%">Action</th>
               </tr>
             </thead>

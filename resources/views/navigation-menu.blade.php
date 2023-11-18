@@ -161,12 +161,12 @@
                 {{ __('Brand') }}
             </x-responsive-nav-link>
             {{-- Admin Manage Type --}}
-            <x-responsive-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link href="{{ route('admin.type.index') }}" :active="request()->routeIs('admin.type.index')">
+                {{ __('Type') }}
             </x-responsive-nav-link>
             {{-- Admin Manage Item --}}
-            <x-responsive-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link href="{{ route('admin.item.index') }}" :active="request()->routeIs('admin.item.index')">
+                {{ __('Item') }}
             </x-responsive-nav-link>
         </div>
 
