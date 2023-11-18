@@ -2,7 +2,7 @@
   <x-slot name="title">Admin</x-slot>
   <x-slot name="header">
     <h2 class="text-xl font-semibold leading-tight text-gray-800">
-      {{ __('Item') }}
+      {{ __('Booking Management') }}
     </h2>
   </x-slot>
 
@@ -14,7 +14,7 @@
         serverSide: true,
         stateSave: true,
         ajax: {
-          url: '{!! route('admin.item.index') !!}',
+          url: '{!! route('admin.booking.index') !!}',
         },
         language: {
           url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/id.json'
@@ -24,26 +24,36 @@
             name: 'id',
           },
           {
-            data: 'thumbnail',
-            name: 'thumbnail',
-            orderable: false,
-            searchable: false,
+            data: 'user.name',
+            name: 'user.name',
           },
           {
-            data: 'name',
-            name: 'name',
+            data: 'item.brand.name',
+            name: 'item.brand.name',
           },
           {
-            data: 'type.name',
-            name: 'type.name',
+            data: 'item.name',
+            name: 'item.name',
           },
           {
-            data: 'brand.name',
-            name: 'brand.name',
+            data: 'start_date',
+            name: 'start_date',
+          },
+                    {
+            data: 'end_date',
+            name: 'end_date',
           },
           {
-            data: 'price',
-            name: 'price',
+            data: 'status',
+            name: 'status',
+          },
+          {
+            data: 'payment_status',
+            name: 'payment_status',
+          },
+          {
+            data: 'total_price',
+            name: 'total_price',
           },
           {
             data: 'action',
@@ -59,23 +69,20 @@
 
   <div class="py-12">
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="mb-10">
-        <a href="{{ route('admin.item.create') }}"
-           class="px-4 py-2 font-bold text-white bg-green-500 rounded shadow-lg hover:bg-green-700">
-          + Add Item
-        </a>
-      </div>
       <div class="overflow-hidden shadow sm:rounded-md">
         <div class="px-4 py-5 bg-white sm:p-6">
           <table id="dataTable">
             <thead>
               <tr>
                 <th style="max-width: 1%">ID</th>
-                <th>Thumbnail</th>
-                <th>Name</th>
-                <th>Type</th>
+                <th>User</th>
                 <th>Brand</th>
-                <th>Price</th>
+                <th>Item</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Booking Status</th>
+                <th>Payment Status</th>
+                <th>Total Price</th>
                 <th style="max-width: 1%">Action</th>
               </tr>
             </thead>

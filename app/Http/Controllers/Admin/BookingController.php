@@ -76,9 +76,11 @@ class BookingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(BookingRequest $request, Booking $booking)
+    public function update(Request $request, Booking $booking)
     {
         $data = $request->all();
+
+        //dd($data);
         $booking->update($data);
         return redirect(route('admin.booking.index'))->with('success', 'booking successfully updated');
     }
