@@ -34,4 +34,7 @@ Route::prefix('admin')->name('admin.')->middleware([
 
     // Admin Item Routing
     Route::resource('item', App\Http\Controllers\Admin\ItemController::class);
+
+    // Admin Booking Routing
+    Route::resource('booking', App\Http\Controllers\Admin\BookingController::class);
 });
