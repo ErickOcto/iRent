@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Front\DetailController;
 use App\Http\Controllers\Front\LandingController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,4 +43,5 @@ Route::prefix('admin')->name('admin.')->middleware([
 
 Route::name('front.')->group(function(){
     Route::get('/', [LandingController::class, 'index'])->name('index');
+    Route::get('/detail/{id}', [DetailController::class, 'index'])->name('detail');
 });
