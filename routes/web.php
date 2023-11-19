@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Front\LandingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::prefix('admin')->name('admin.')->middleware([
     'auth:sanctum', 'admin',
@@ -37,4 +38,8 @@ Route::prefix('admin')->name('admin.')->middleware([
 
     // Admin Booking Routing
     Route::resource('booking', App\Http\Controllers\Admin\BookingController::class);
+});
+
+Route::name('front.')->group(function(){
+    Route::get('/', [LandingController::class, 'index'])->name('index');
 });
