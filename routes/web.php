@@ -42,6 +42,13 @@ Route::prefix('admin')->name('admin.')->middleware([
 });
 
 Route::name('front.')->group(function(){
+    // User Landing Page
     Route::get('/', [LandingController::class, 'index'])->name('index');
+    // User Detail Page
     Route::get('/detail/{id}', [DetailController::class, 'index'])->name('detail');
+    // User Checkout Page
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/checkout/{slug}', [CheckoutController::class, 'index'])->name('checkout');
+        Route::post('/checkout/{slug}', [CheckoutController::class, 'store'])->name('checkout.store');
+    });
 });
